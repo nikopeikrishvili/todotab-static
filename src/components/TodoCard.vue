@@ -1,5 +1,5 @@
 <template>
-  <div class="container items-center align-middle w-1/5 h-1/2 p-5 border dark:default-in-dark rounded">
+  <div class="container items-center align-middle w-1/5 h-1/2 p-5 border border-gray-300 shadow dark:border-default-in-dark dark:default-in-dark rounded">
 
 
     <ul v-for="(card, cardId) in cards" :key="'card_'+cardId">
