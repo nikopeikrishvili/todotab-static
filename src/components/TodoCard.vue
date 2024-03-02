@@ -55,8 +55,7 @@ export default defineComponent({
 
 
     const addTask = (cardId: number) => {
-      console.log(cardId);
-      console.log(cards);
+
       if (!newTask.value.trim()) return;
       cards.value[cardId].tasks.push({ content: newTask.value, completed: false });
       newTask.value = '';
@@ -64,7 +63,8 @@ export default defineComponent({
     };
 
     const editTask = (cardId: number, index: number) => {
-      const newContent = prompt('Edit task:', tasks.value[index].content);
+      const task = cards.value[cardId].tasks[index].content
+      const newContent = prompt('Edit task:',task)
       if (newContent !== null && newContent.trim() !== '') {
         cards.value[cardId].tasks[index].content = newContent;
         saveTasks();
