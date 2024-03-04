@@ -89,7 +89,7 @@ const setTitleEditMode = (cardId: number, mode: boolean) => {
     <input v-model="newTask" type="text" placeholder="> Add a new task"
            class="rounded p-1 input input-bordered w-full dark:bg-default-input-dark text-sm dark:text-gray-100" />
   </form>
-  <ul>
+  <ul class="overflow-auto h-full">
     <li v-for="(task, index) in card.tasks" :key="index"
         class="flex justify-between items-center p-2 border-b border-default-in-dark">
       <div class="flex h-6 items-center">
