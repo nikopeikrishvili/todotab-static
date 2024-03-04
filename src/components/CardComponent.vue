@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import { PencilIcon, TrashIcon } from '@heroicons/vue/24/solid'
+import { PencilIcon, TrashIcon } from '@heroicons/vue/24/outline'
 import type { Card, Task } from '@/Interfaces/Cards'
 import { useCardsStore } from '@/stores/useCardsStore'
 import { storeToRefs } from 'pinia'
