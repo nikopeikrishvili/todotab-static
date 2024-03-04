@@ -1,10 +1,10 @@
 <template>
   <div
-    class="flex space-x-2 align-middle items-center justify-center w-full h-full">
+    class="grid grid-cols-5 gap-4 align-middle items-center justify-center">
 
 
     <div v-for="(card, cardId) in cards" :key="'card_'+cardId" @mouseover="card.inHover = true"
-        @mouseleave="card.inHover = false" class="flex flex-col w-1/5 h-1/2 p-5 rounded border border-gray-300 shadow dark:border-default-in-dark">
+        @mouseleave="card.inHover = false" class="flex flex-col px-4 py-3  rounded border border-gray-300 shadow dark:border-default-in-dark">
         <CardComponent :card-id="cardId" :card="card" />
     </div>
   </div>
