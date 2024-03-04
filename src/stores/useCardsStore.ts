@@ -36,6 +36,11 @@ export const useCardsStore = defineStore('cards', {
     saveCards() {
       localStorage.setItem('cards', JSON.stringify(this.cards));
     },
+    // update card by index
+    updateCard(cardIndex: number, newCard: Card) {
+      this.cards[cardIndex] = newCard;
+      this.saveCards();
+    },
   },
 });
 
