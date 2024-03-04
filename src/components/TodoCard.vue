@@ -78,7 +78,7 @@ export default defineComponent({
         inHover: false,
         titleInEditMode: true
       }
-      cardsStore.addCard(newCard)
+      store.addCard(newCard)
     }
 
     if (cards.value.length === 0) {
