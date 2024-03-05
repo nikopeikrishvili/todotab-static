@@ -14,7 +14,6 @@ export default defineComponent({
     const isDarkMode = ref(false);
 
     const toggleDarkMode = (value: any) => {
-      console.log(value)
       isDarkMode.value = !isDarkMode.value;
       localStorage.setItem('darkMode', isDarkMode.value.toString());
       if (isDarkMode.value) {
@@ -26,6 +25,7 @@ export default defineComponent({
 
     // Check and apply theme on component mount
     onMounted(() => {
+      if(localStorage.getItem('darkMode') === null) localStorage.setItem('darkMode', 'true')
       isDarkMode.value = localStorage.getItem('darkMode') === 'true';
       if (isDarkMode.value) {
         document.documentElement.classList.add('dark');

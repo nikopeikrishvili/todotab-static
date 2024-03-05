@@ -5,7 +5,7 @@ import type { Card, Task } from '@/Interfaces/Cards'
 import { useCardsStore } from '@/stores/useCardsStore'
 import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
-
+import {event} from 'vue-gtag'
 defineProps<{
   card: Card
   cardId: number
@@ -28,6 +28,7 @@ const createEmptyCard = () => {
     titleInEditMode: true
   }
   store.addCard(newCard)
+  event('CreateCard', {});
 }
 
 if (cards.value.length === 0) {
@@ -37,21 +38,25 @@ const addTask = (cardId: number) => {
   if (!newTask.value.trim()) return
   store.addTask(cardId, newTask.value);
   newTask.value = '';
+  event('CreateTask', {});
 }
 
 const editTask = (cardId: number, index: number) => {
   const task = cards.value[cardId].tasks[index].content
   const newContent = prompt('Edit task:', task)
   if (newContent !== null && newContent.trim() !== '') {
+    event('editTask',{});
     store.updateTask(cardId, index, newContent);
   }
 }
 
 const deleteTask = (cardId: number, index: number) => {
+  event('deleteTask',{});
   store.deleteTask(cardId, index);
 }
 
 const toggleCompletion = (cardId: number, taskId: number) => {
+  event('toggleCompletion',{});
   store.toggleTaskCompletion(cardId, taskId);
 }
 
@@ -62,9 +67,15 @@ const setTitleEditMode = (cardId: number, mode: boolean) => {
     title.value = card.title;
   }
   else{
+
+    event('editCardTitle',{});
     card.title = title.value;
   }
   store.updateCard(cardId, card);
+}
+const deleteCard = (cardId: number) => {
+  event('deleteCard',{});
+  store.deleteCard(cardId);
 }
 </script>
 
@@ -73,8 +84,13 @@ const setTitleEditMode = (cardId: number, mode: boolean) => {
     <h1 v-if="!card.titleInEditMode" class="text-xl font-bold mb-4 text-gray-600 dark:text-default-in-dark">
       {{ card.title }}</h1>
     <div>
-      <button v-if="card.inHover" class="rounded ring-1 dark:ring-default-in-dark p-1 dark:text-default-in-dark text-xs"
-              @click="setTitleEditMode(cardId, true)">Edit
+      <button v-if="card.inHover" @click="setTitleEditMode(cardId, true)"
+              class="btn btn-sm btn-warning mr-2 dark:text-default-in-dark text-xs w-4 h-4">
+        <PencilIcon class="text-xs" />
+      </button>
+      <button v-if="card.inHover" @click="deleteCard(cardId)"
+              class="btn btn-sm btn-error dark:text-red-500 text-xs w-4 h-4">
+        <TrashIcon />
       </button>
     </div>
   </div>

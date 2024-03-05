@@ -41,6 +41,10 @@ export const useCardsStore = defineStore('cards', {
       this.cards[cardIndex] = newCard;
       this.saveCards();
     },
+    deleteCard(cardIndex: number) {
+      this.cards.splice(cardIndex, 1);
+      this.saveCards();
+    }
   },
 });
 
